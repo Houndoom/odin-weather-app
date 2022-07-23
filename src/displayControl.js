@@ -1,6 +1,6 @@
 import {WeatherDetails} from './weatherDetails.js';
 
-export {setupHeader, setupMain, updateWeatherItem};
+export {setupHeader, setupMain, updateAllWeatherItems, setInputError};
 
 /* Set up the site header */
 
@@ -119,6 +119,31 @@ const setupMain = function () {
 /* Updates specific weather value */
 
 const updateWeatherItem = function (item, value) {
-  const weatherItem = document.querySelector(`#${item} .weather-value`);
+  const weatherItem = document.querySelector(item);
   weatherItem.textContent = value;
+}
+
+/* Updates all fields */
+
+const updateAllWeatherItems = function (json) {
+
+  updateWeatherItem('.location-name', json.name);
+  updateWeatherItem('#temp .weather-value', parseFloat(json.main.temp).toFixed(0));
+  updateWeatherItem('#feels-like .weather-value', parseFloat(json.main.feels_like).toFixed(0));
+  updateWeatherItem('#pressure .weather-value', json.main.pressure);
+  updateWeatherItem('#humidity .weather-value', json.main.humidity);
+  updateWeatherItem('#wind-speed .weather-value', json.wind.speed);
+
+  const locationWeatherImg = document.querySelector('.location img');
+  locationWeatherImg.src = `http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
+}
+
+/* Toggle search bar error */
+
+const setInputError = function (value) {
+  const searchBarInput = document.getElementById('search-bar-input');
+  const searchBarError = document.querySelector('.search-bar-error');
+
+  searchBarInput.setCustomValidity(value);
+  searchBarError.textContent = value;
 }
