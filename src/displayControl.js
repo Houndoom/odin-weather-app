@@ -1,8 +1,8 @@
 import {WeatherDetails} from './weatherDetails.js';
 
-export {setupHeader, setupMain};
+export {setupHeader, setupMain, updateWeatherItem};
 
-/* Function to set up the site header */
+/* Set up the site header */
 
 const setupHeader = function() {
   const header = document.createElement('div');
@@ -19,15 +19,25 @@ const setupHeader = function() {
   searchBarLabel.for = 'search-bar-input';
   searchBarLabel.textContent = "Enter location here:";
 
+  const searchBarInputError = document.createElement('div');
+  searchBarInputError.classList.add('search-bar-input-error');
+
   const searchBarInput = document.createElement('input');
   searchBarInput.type = 'text';
   searchBarInput.id = 'search-bar-input';
 
+  const searchBarError = document.createElement('div');
+  searchBarError.classList.add('search-bar-error');
+
+  searchBarInputError.appendChild(searchBarInput);
+  searchBarInputError.appendChild(searchBarError);
+  
   const searchButton = document.createElement('button');
+  searchButton.id = 'search-button';
   searchButton.textContent = 'Go';
 
   searchBar.appendChild(searchBarLabel);
-  searchBar.appendChild(searchBarInput);
+  searchBar.appendChild(searchBarInputError);
   searchBar.appendChild(searchButton);
 
   header.appendChild(pageTitle);
@@ -36,7 +46,7 @@ const setupHeader = function() {
   document.querySelector('body').appendChild(header);
 }
 
-/* Function to display the weather content */
+/* Display the weather content */
 
 const setupMain = function () {
 
@@ -59,6 +69,8 @@ const setupMain = function () {
   weatherDetails.classList.add('weather-details');
 
   const weatherDetailsList = document.createElement('ul');
+
+  // Set up each weather item
 
   const weatherDetailsArray = [
     new WeatherDetails('temp', 'Temperature', '℃'),
@@ -102,4 +114,11 @@ const setupMain = function () {
 
   document.querySelector('body').appendChild(main);
 
+}
+
+/* Updates specific weather value */
+
+const updateWeatherItem = function (item, value) {
+  const weatherItem = document.querySelector(`#${item} .weather-value`);
+  weatherItem.textContent = value;
 }

@@ -25,7 +25,31 @@ body {
 }
 
 .search-bar {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto;
+  column-gap: 5px;
+  align-content: center;
+}
 
+.search-bar input {
+  border: 1px solid black;
+  outline: none;
+}
+
+.search-bar-input-error {
+  position: relative;
+}
+
+.search-bar-error {
+  color: red;
+  font-size: 0.5rem;
+  position: absolute;
+  bottom: -8px;
+}
+
+.search-bar input:invalid {
+  border-color: red;
 }
 
 .main {
@@ -59,10 +83,12 @@ li {
   display: grid;
   margin: 0;
   padding: 0;
-  grid-template-columns: 200px 40px 40px;
+  grid-template-columns: 200px 80px 40px;
   column-gap: 5px;
 }
 
 .weather-value {
   border-bottom: 1px solid black;
+  display: grid;
+  place-content: center;
 }
