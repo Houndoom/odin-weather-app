@@ -60,15 +60,20 @@ body {
 .location {
   font-size: 4rem;
   display: flex;
+  padding-bottom: 10px;
+}
+
+.location img {
+  height: 4rem;
 }
 
 .weather-details {
   box-sizing: border-box;
+  border-top: 1px solid rgb(150,150,150);
   height: 400px;
   width: 600px;
-  border: 1px solid black;
-  border-radius: 5px;
   font-size: 2rem;
+  padding-top: 10px;
 }
 
 ul {

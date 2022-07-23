@@ -21,11 +21,20 @@ async function updateWeather() {
     }
     searchBarInput.setCustomValidity('');
     searchBarError.textContent = '';
+
+    const locationName = document.querySelector('.location-name');
+    locationName.textContent = json.name;
+
     updateWeatherItem('temp', parseFloat(json.main.temp).toFixed(0));
     updateWeatherItem('feels-like', parseFloat(json.main.feels_like).toFixed(0));
     updateWeatherItem('pressure', json.main.pressure);
     updateWeatherItem('humidity', json.main.humidity);
     updateWeatherItem('wind-speed', json.wind.speed);
+
+    console.log(json.weather[0].icon);
+    const locationWeatherImg = document.querySelector('.location img');
+    locationWeatherImg.src = `http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
+
   } else {
     searchBarInput.setCustomValidity('Invalid');
     searchBarError.textContent = 'Please enter a valid location';
